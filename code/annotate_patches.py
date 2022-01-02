@@ -12,7 +12,7 @@ import matplotlib
 root_dir = '/home/giorgia/Desktop/MAI/Thesis/images/selected_50m'
 outdir = '/home/giorgia/Desktop/MAI/Thesis/images/patches'
 
-#os.path.join('/content', 'drive', 'MyDrive', 'selected_50m/')
+"""
 img_paths = []
 for root, dirs, files in os.walk(root_dir):
     for f in files:
@@ -33,16 +33,21 @@ for imf in img_paths:
             patches.append(p)
             #imsave(os.path.join(outdir, os.path.basename(patch_filename)), p)
 patch_info['plastic']=pd.Series(np.ones(len(patch_info))*-1)
+"""
 
 #patch_info.to_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv')
 matplotlib.use('TkAgg')
 
-for ind in range(5) : #len(patches)):
+dims = 256
+patch_info = pd.read_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv')
+patch_info = patch_info[patch_info['plastic']==-1].reset_index(drop=True)
+for ind in range(len(patch_info)):
     row = patch_info.loc[ind,:]
     if row['plastic'] == -1:
         imf = row['imfilename']
         plt.figure(figsize=(8,8))
-        plt.imshow(patches[ind]) 
+        patch = imread(os.path.join(outdir, os.path.basename(row['patch_filename'])))
+        plt.imshow(patch) 
         f, ax = plt.subplots()
         f.set_figheight(10)
         f.set_figwidth(30)
@@ -55,6 +60,7 @@ for ind in range(5) : #len(patches)):
         while b!='0' and b!='1':
             b = input('class must be either 1 or 0. retype class 1/0 ')
         patch_info.loc[ind,'plastic'] = int(b)
-        
-
-print(patch_info['plastic'])
+        # save every 20 annotated patches 
+        if ind%20 == 0:
+            print('saving labels of latest annotated 20 patches')
+            patch_info.to_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv', index=0)

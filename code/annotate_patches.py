@@ -45,13 +45,13 @@ for ind in range(len(patch_info)):
     row = patch_info.loc[ind,:]
     if row['plastic'] == -1:
         imf = row['imfilename']
-        plt.figure(figsize=(8,8))
+        
+        plt.figure(figsize=(30,60))        
+        plt.subplot(121)
         patch = imread(os.path.join(outdir, os.path.basename(row['patch_filename'])))
         plt.imshow(patch) 
-        f, ax = plt.subplots()
-        f.set_figheight(10)
-        f.set_figwidth(30)
-        ax.imshow(imread(imf))
+        ax = plt.subplot(122)
+        plt.imshow(imread(imf))
         rect = Rectangle( ( row['x'], row['y']), dims, dims, linewidth=3, edgecolor='r', facecolor='none')
         ax.add_patch(rect)
         plt.pause(5)

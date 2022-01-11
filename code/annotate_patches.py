@@ -40,7 +40,6 @@ matplotlib.use('TkAgg')
 
 dims = 256
 patch_info = pd.read_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv')
-patch_info = patch_info[patch_info['plastic']==-1].reset_index(drop=True)
 for ind in range(len(patch_info)):
     row = patch_info.loc[ind,:]
     if row['plastic'] == -1:
@@ -54,13 +53,13 @@ for ind in range(len(patch_info)):
         plt.imshow(imread(imf))
         rect = Rectangle( ( row['x'], row['y']), dims, dims, linewidth=3, edgecolor='r', facecolor='none')
         ax.add_patch(rect)
-        plt.pause(5)
+        plt.waitforbuttonpress()
         plt.close('all')
         b = input('type class 1/0 ')
         while b!='0' and b!='1':
             b = input('class must be either 1 or 0. retype class 1/0 ')
         patch_info.loc[ind,'plastic'] = int(b)
         # save every 20 annotated patches 
-        if ind%20 == 0:
+        if ind!=0 and ind%20 == 0:
             print('saving labels of latest annotated 20 patches')
-            patch_info.to_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv', index=0)
+            patch_info.to_csv('/home/giorgia/Desktop/MAI/Thesis/patch_info.csv', index=False)

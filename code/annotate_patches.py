@@ -47,7 +47,8 @@ for ind in range(len(patch_info)):
         if imf==img_to_skip: ###### fix 
             continue
         img_to_skip = None
-        plt.figure(figsize=(30,60))        
+        plt.figure(figsize=(30,60)) 
+        plt.suptitle(os.path.basename(imf), fontsize=25, y=.9,)       
         plt.subplot(121)
         #patch = imread(os.path.join(outdir, os.path.basename(row['patch_filename'])))
         patch = imread(row['patch_filename'])

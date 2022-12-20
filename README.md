@@ -7,4 +7,4 @@ DINO and STEGO frameworks have been adapted to work in Colab and to run this the
 - DINO: https://github.com/facebookresearch/dino.git
 - STEGO: https://github.com/mhamilton723/STEGO.git
 
-Both the repository and code are still being cleaned and updated. More code can be found in the ```development``` branch.
+Both the repository and code are being cleaned up and updated. More code can be found in the ```development``` branch.

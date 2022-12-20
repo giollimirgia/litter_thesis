@@ -1,4 +1,4 @@
-# litter_thesis
+# Annotation-Efficient ML for Marine Litter Detection
 Advanced Master of AI thesis on marine litter detection
 
 ### NOTE:
